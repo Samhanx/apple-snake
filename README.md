@@ -1,9 +1,13 @@
 # apple-snake
 基于Canvas的贪吃蛇小游戏
 
+尚未完工...
+
 - [x] webpack基本脚手架
 
 - [x] ES6语法
+
+- [ ] 单元测试（待定）
 
 ```bash
 # 安装依赖
