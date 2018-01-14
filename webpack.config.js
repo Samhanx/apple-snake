@@ -45,7 +45,7 @@ module.exports = {
       }
     }),
     new ExtractPlugin({
-      filename: 'main.css'
+      filename: 'main.[hash].css'
     })
   ]
 }
