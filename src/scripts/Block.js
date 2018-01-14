@@ -1,8 +1,10 @@
+import config from '../config.js'
+
 export default class Block {
   constructor(col, row) {
     this.col = col
     this.row = row
-    this.blockSize = 10
+    this.blockSize = config.blockSize
   }
 
   drawSquare(canvasCtx, color) {

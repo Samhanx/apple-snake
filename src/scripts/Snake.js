@@ -1,3 +1,4 @@
+import config from '../config.js'
 import Block from './Block'
 
 export default class Snake {
@@ -13,7 +14,7 @@ export default class Snake {
   }
 
   draw() {
-    this.segments.forEach(block => block.drawSquare(this.ctx, 'purple'))
+    this.segments.forEach(block => block.drawSquare(this.ctx, config.snakeColor))
   }
 
   move() {
@@ -41,13 +42,8 @@ export default class Snake {
   }
 
   setDirection(direction) {
-    const reverseDirs = {
-      left: 'right',
-      right: 'left',
-      up: 'down',
-      down: 'up'
-    }
-    if (direction === this.direction || direction === reverseDirs[this.direction]) {
+    const negative = config.negativeDirections[this.direction]
+    if (direction === this.direction || direction === negative) {
       return
     }
     this.nextDirection = direction
