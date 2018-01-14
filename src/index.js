@@ -1,6 +1,6 @@
 import 'normalize.css'
 import './style.css'
-import Block from './scripts/Block'
+import Snake from './scripts/Snake'
 
 const l = console.log.bind(console)
 
@@ -9,8 +9,26 @@ const ctx = canvas.getContext('2d')
 const width = canvas.width
 const height = canvas.height
 
-let sampleBlock = new Block(3, 4)
-sampleBlock.drawSquare(ctx, 'LightBlue')
+let snake = new Snake(ctx)
 
-let sampleCircle = new Block(8, 10)
-sampleCircle.drawCircle(ctx, 'LightGreen')
+let canvasTimer = setInterval(() => {
+  ctx.clearRect(0, 0, width, height)
+  snake.move()
+  snake.draw()
+}, 300)
+
+document.addEventListener('keydown', event => {
+  const directions = {
+    37: 'left',
+    38: 'up',
+    39: 'right',
+    40: 'down',
+    32: 'stop'
+  }
+  const direction = directions[event.keyCode]
+  if (direction === 'stop') {
+    clearInterval(canvasTimer)
+  } else if (direction) {
+    snake.setDirection(direction)
+  }
+})
