@@ -19,7 +19,7 @@ const drawBorder = () => {
 }
 
 drawBorder()
-let snake = new Snake(ctx)
+let snake = new Snake(ctx, width, height)
 
 let canvasTimer = setInterval(() => {
   ctx.clearRect(0, 0, width, height)

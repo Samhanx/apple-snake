@@ -2,7 +2,7 @@ import config from '../config.js'
 import Block from './Block'
 
 export default class Snake {
-  constructor(canvasCtx) {
+  constructor(canvasCtx, canvasWidth, canvasHeight) {
     this.ctx = canvasCtx
     this.segments = [
       new Block(7, 5),
@@ -47,5 +47,23 @@ export default class Snake {
       return
     }
     this.nextDirection = direction
+  }
+
+  checkCollision(head) {
+    const leftCollision = head.col === 0
+    const rightCollision = head.col === (canvasWidth / config.blockSize) - 1
+    const topCollisiion = head.row === 0
+    const bottomCollision = head.row === (canvasHeight / config.blockSize) - 1
+    const isCollision = leftCollision || rightCollision || topCollisiion || bottomCollision
+    if (isCollision) return isCollision
+
+    let selfCollision = false
+    this.segments.forEach(segment => {
+      if (head.isEqual(segment)) {
+        selfCollision = true
+      }
+    })
+
+    return selfCollision
   }
 }
