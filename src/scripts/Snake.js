@@ -55,15 +55,7 @@ export default class Snake {
     const topCollisiion = head.row === 0
     const bottomCollision = head.row === (canvasHeight / config.blockSize) - 1
     const isCollision = leftCollision || rightCollision || topCollisiion || bottomCollision
-    if (isCollision) return isCollision
 
-    let selfCollision = false
-    this.segments.forEach(segment => {
-      if (head.isEqual(segment)) {
-        selfCollision = true
-      }
-    })
-
-    return selfCollision
+    return isCollision || !this.segments.every(segment => !head.isEqual(segment))
   }
 }
