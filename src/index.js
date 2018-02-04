@@ -2,6 +2,7 @@ import 'normalize.css'
 import './style.css'
 import config from './config'
 import Snake from './scripts/Snake'
+import Apple from './scripts/Apple'
 
 const l = console.log.bind(console)
 
@@ -20,11 +21,13 @@ const drawBorder = () => {
 
 drawBorder()
 let snake = new Snake(ctx, width, height)
+let apple = new Apple(snake)
 
 let canvasTimer = snake.timerId = setInterval(() => {
   ctx.clearRect(0, 0, width, height)
   snake.move()
   snake.draw()
+  apple.draw()
   drawBorder()
 }, config.speed)
 

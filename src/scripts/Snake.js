@@ -14,6 +14,7 @@ export default class Snake {
     ]
     this.direction = 'right'
     this.nextDirection = 'right'
+    this.targetApple = null
   }
 
   draw() {
@@ -45,6 +46,10 @@ export default class Snake {
       clearInterval(this.timerId)
       alert('Game Over')
       return
+    }
+
+    if (this.targetApple && newHead.isEqual(this.targetApple.position)) {
+      this.targetApple.move()
     }
     
     this.segments.unshift(newHead)
