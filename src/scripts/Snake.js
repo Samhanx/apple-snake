@@ -47,13 +47,13 @@ export default class Snake {
       alert('Game Over')
       return
     }
-
-    if (this.targetApple && newHead.isEqual(this.targetApple.position)) {
-      this.targetApple.move()
-    }
     
     this.segments.unshift(newHead)
-    this.segments.pop()
+    if (this.targetApple && newHead.isEqual(this.targetApple.position)) {
+      this.targetApple.move()
+    } else {
+      this.segments.pop()
+    }
   }
 
   setDirection(direction) {
