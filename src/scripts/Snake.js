@@ -4,6 +4,9 @@ import Block from './Block'
 export default class Snake {
   constructor(canvasCtx, canvasWidth, canvasHeight) {
     this.ctx = canvasCtx
+    this.right = canvasWidth
+    this.bottom = canvasHeight
+    this.timerId = 0
     this.segments = [
       new Block(7, 5),
       new Block(6, 5),
@@ -37,6 +40,13 @@ export default class Snake {
         newHead = new Block(head.col, head.row + 1)
         break
     }
+
+    if (this.checkCollision(newHead)) {
+      clearInterval(this.timerId)
+      alert('Game Over')
+      return
+    }
+    
     this.segments.unshift(newHead)
     this.segments.pop()
   }
@@ -51,9 +61,9 @@ export default class Snake {
 
   checkCollision(head) {
     const leftCollision = head.col === 0
-    const rightCollision = head.col === (canvasWidth / config.blockSize) - 1
+    const rightCollision = head.col === (this.right / config.blockSize) - 1
     const topCollisiion = head.row === 0
-    const bottomCollision = head.row === (canvasHeight / config.blockSize) - 1
+    const bottomCollision = head.row === (this.bottom / config.blockSize) - 1
     const isCollision = leftCollision || rightCollision || topCollisiion || bottomCollision
 
     return isCollision || !this.segments.every(segment => !head.isEqual(segment))

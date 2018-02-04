@@ -21,7 +21,7 @@ const drawBorder = () => {
 drawBorder()
 let snake = new Snake(ctx, width, height)
 
-let canvasTimer = setInterval(() => {
+let canvasTimer = snake.timerId = setInterval(() => {
   ctx.clearRect(0, 0, width, height)
   snake.move()
   snake.draw()
