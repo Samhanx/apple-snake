@@ -1,7 +1,9 @@
 # apple-snake
-基于Canvas的贪吃蛇小游戏
+基于Canvas的简易贪吃蛇小游戏
 
-完成基本功能...
+用作Canvas和ES6基础练习
+
+已完成基本功能...
 
 Todo:
 
