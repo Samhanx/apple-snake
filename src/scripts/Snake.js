@@ -54,7 +54,9 @@ export default class Snake {
     this.segments.unshift(newHead)
     if (this.targetApple && newHead.isEqual(this.targetApple.position)) {
       this.targetApple.move()
-      config.speed -= 10
+      if (config.speed !== 30) {
+        config.speed -= 10
+      } 
     } else {
       this.segments.pop()
     }
