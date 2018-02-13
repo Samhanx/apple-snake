@@ -6,6 +6,7 @@ export default class Snake {
     this.ctx = canvasCtx
     this.right = canvasWidth
     this.bottom = canvasHeight
+    this.isCollision = false
     this.timerId = 0
     this.segments = [
       new Block(7, 5),
@@ -43,7 +44,9 @@ export default class Snake {
     }
 
     if (this.checkCollision(newHead)) {
-      clearInterval(this.timerId)
+      // clearInterval(this.timerId)
+      this.isCollision = true
+      clearTimeout(this.timerId)
       alert('Game Over')
       return
     }
@@ -51,6 +54,7 @@ export default class Snake {
     this.segments.unshift(newHead)
     if (this.targetApple && newHead.isEqual(this.targetApple.position)) {
       this.targetApple.move()
+      config.speed -= 10
     } else {
       this.segments.pop()
     }

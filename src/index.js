@@ -23,18 +23,33 @@ drawBorder()
 let snake = new Snake(ctx, width, height)
 let apple = new Apple(snake)
 
-let canvasTimer = snake.timerId = setInterval(() => {
+// let canvasTimer = snake.timerId = setInterval(() => {
+//   ctx.clearRect(0, 0, width, height)
+//   snake.move()
+//   snake.draw()
+//   apple.draw()
+//   drawBorder()
+// }, config.speed)
+
+let canvasTimeout = 0
+
+const drawCanvas = () => {
   ctx.clearRect(0, 0, width, height)
   snake.move()
   snake.draw()
   apple.draw()
   drawBorder()
-}, config.speed)
+  if (!snake.isCollision) {
+    canvasTimeout = snake.timerId = setTimeout(drawCanvas, config.speed)
+  }
+}
+canvasTimeout = snake.timerId = setTimeout(drawCanvas, config.speed)
 
 document.addEventListener('keydown', event => {
   const direction = config.directions[event.keyCode]
   if (direction === 'stop') {
-    clearInterval(canvasTimer)
+    // clearInterval(canvasTimer)
+    clearTimeout(canvasTimeout)
   } else if (direction) {
     snake.setDirection(direction)
   }
