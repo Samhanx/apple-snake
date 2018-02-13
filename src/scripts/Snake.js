@@ -17,6 +17,7 @@ export default class Snake {
     this.direction = 'right'
     this.nextDirection = 'right'
     this.targetApple = null
+    this.score = null
   }
 
   draw() {
@@ -53,6 +54,9 @@ export default class Snake {
     
     this.segments.unshift(newHead)
     if (this.targetApple && newHead.isEqual(this.targetApple.position)) {
+      if (this.score) {
+        this.score.points += 1
+      }
       this.targetApple.move()
       if (config.speed !== 30) {
         config.speed -= 10

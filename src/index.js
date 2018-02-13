@@ -4,6 +4,7 @@ import config from './config'
 import Snake from './scripts/Snake'
 import Apple from './scripts/Apple'
 
+const scoreBox = document.querySelector('#score')
 const canvas = document.querySelector('#canvas')
 const ctx = canvas.getContext('2d')
 const width = canvas.width
@@ -20,6 +21,21 @@ const drawBorder = () => {
 drawBorder()
 let snake = new Snake(ctx, width, height)
 let apple = new Apple(snake)
+let score = new Proxy({
+  points: 0
+}, {
+  set(obj, prop, val) {
+    if (obj[prop] === val) {
+      return true
+    }
+    if (prop === 'points') {
+      scoreBox.innerHTML = `&nbsp;&nbsp;当前分数：${val}`
+    }
+    obj[prop] = val
+    return true
+  }
+})
+snake.score = score
 
 let canvasTimeout = 0
 
