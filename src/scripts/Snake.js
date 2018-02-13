@@ -7,6 +7,7 @@ export default class Snake {
     this.right = canvasWidth
     this.bottom = canvasHeight
     this.isCollision = false
+    this.paused = false
     this.timerId = 0
     this.segments = [
       new Block(7, 5),
@@ -44,7 +45,6 @@ export default class Snake {
     }
 
     if (this.checkCollision(newHead)) {
-      // clearInterval(this.timerId)
       this.isCollision = true
       clearTimeout(this.timerId)
       alert('Game Over')

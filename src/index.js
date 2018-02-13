@@ -4,8 +4,6 @@ import config from './config'
 import Snake from './scripts/Snake'
 import Apple from './scripts/Apple'
 
-const l = console.log.bind(console)
-
 const canvas = document.querySelector('#canvas')
 const ctx = canvas.getContext('2d')
 const width = canvas.width
@@ -23,14 +21,6 @@ drawBorder()
 let snake = new Snake(ctx, width, height)
 let apple = new Apple(snake)
 
-// let canvasTimer = snake.timerId = setInterval(() => {
-//   ctx.clearRect(0, 0, width, height)
-//   snake.move()
-//   snake.draw()
-//   apple.draw()
-//   drawBorder()
-// }, config.speed)
-
 let canvasTimeout = 0
 
 const drawCanvas = () => {
@@ -47,9 +37,13 @@ canvasTimeout = snake.timerId = setTimeout(drawCanvas, config.speed)
 
 document.addEventListener('keydown', event => {
   const direction = config.directions[event.keyCode]
-  if (direction === 'stop') {
-    // clearInterval(canvasTimer)
-    clearTimeout(canvasTimeout)
+  if (direction === 'pause') {
+    if (snake.paused) {
+      canvasTimeout = snake.timerId = setTimeout(drawCanvas, config.speed)
+    } else {
+      clearTimeout(canvasTimeout)
+    }
+    snake.paused = !snake.paused
   } else if (direction) {
     snake.setDirection(direction)
   }

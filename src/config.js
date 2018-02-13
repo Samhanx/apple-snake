@@ -9,7 +9,7 @@ export default {
     38: 'up',
     39: 'right',
     40: 'down',
-    32: 'stop'
+    32: 'pause'
   },
   negativeDirections: {
     left: 'right',
