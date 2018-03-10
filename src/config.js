@@ -1,8 +1,8 @@
 export default {
   speed: 300,
   blockSize: 10,
-  snakeColor: 'purple',
-  appleColor: 'lightgreen',
+  snakeColor: 'lightgreen',
+  appleColor: 'tomato',
   borderColor: 'gray',
   directions: {
     37: 'left',
